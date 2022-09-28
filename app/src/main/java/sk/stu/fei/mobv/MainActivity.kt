@@ -50,7 +50,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun pourOutGlass() {
-        waterAnimation.progress = 0F;
+        if (waterAnimation.progress != 0F) {
+            waterAnimation.speed = -5F
+            waterAnimation.resumeAnimation()
+        }
     }
 
     private fun startAddWaterToGlass() {
