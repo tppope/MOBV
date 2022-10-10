@@ -3,4 +3,17 @@
     <string name="pour_out">Pour Out</string>
     <string name="add">Add</string>
     <string name="remove">Remove</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_the_data">Zadajte údaje</string>
+    <string name="enter_owner_name">Zadajte Meno</string>
+    <string name="enter_firm_name">Zadajte názov podniku</string>
+    <string name="enter_latitude">Zadajte zem. šírku podniku</string>
+    <string name="enter_longitude">Zadajte zem. dĺžku podniku</string>
+    <string name="confirm">Potvrdiť</string>
+    <string name="firm_owner_label">Firma vlastníka {owner_name}</string>
+    <string name="show_on_map">Zobraziť na mape</string>
+    <string name="call">Zavolať</string>
+    <string name="enter_phone_number">Zadajte telefónne číslo</string>
+    <string name="your_firm">Váš podnik</string>
 </resources>

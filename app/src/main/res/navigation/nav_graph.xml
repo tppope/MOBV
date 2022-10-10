@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    android:label="@string/your_firm"
+    app:startDestination="@id/firmFormFragment">
+
+    <fragment
+        android:id="@+id/firmFragment"
+        android:name="sk.stu.fei.mobv.FirmFragment"
+        android:label="@string/firm_owner_label"
+        tools:layout="@layout/fragment_firm">
+        <argument
+            android:name="owner_name"
+            app:argType="string" />
+        <argument
+            android:name="firm_name"
+            app:argType="string" />
+        <argument
+            android:name="latitude"
+            app:argType="string" />
+        <argument
+            android:name="longitude"
+            app:argType="string" />
+        <argument
+            android:name="phone_number"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/firmFormFragment"
+        android:name="sk.stu.fei.mobv.FirmFormFragment"
+        android:label="Vaša firma"
+        tools:layout="@layout/fragment_firm_form">
+        <action
+            android:id="@+id/action_firmFormFragment_to_firmFragment"
+            app:destination="@id/firmFragment" />
+    </fragment>
+</navigation>

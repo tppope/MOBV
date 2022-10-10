@@ -3,74 +3,31 @@ package sk.stu.fei.mobv
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.MotionEvent
-import android.view.View
-import android.widget.Button
-import com.airbnb.lottie.LottieAnimationView
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 
 private const val TAG = "MainActivity"
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var waterAnimation: LottieAnimationView
+    private lateinit var navController: NavController
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<Button>(R.id.add_button).setOnTouchListener {
-                _: View, motionEvent: MotionEvent ->
-            when (motionEvent.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    startAddWaterToGlass()
-                }
-                MotionEvent.ACTION_UP -> {
-                    stopAnimateWater()
-                }
-            }
-            true
-        }
-        findViewById<Button>(R.id.remove_button).setOnTouchListener { _, motionEvent ->
-            when (motionEvent.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    startRemoveWaterFromGlass()
-                }
-                MotionEvent.ACTION_UP -> {
-                    stopAnimateWater()
-                }
-            }
-            true
-        }
-        findViewById<Button>(R.id.pour_out_button).setOnClickListener { pourOutGlass() }
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
 
-        waterAnimation = findViewById(R.id.animationView)
+        setupActionBarWithNavController(navController)
     }
 
-    private fun pourOutGlass() {
-        if (waterAnimation.progress != 0F) {
-            waterAnimation.speed = -5F
-            waterAnimation.resumeAnimation()
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    private fun startAddWaterToGlass() {
-        if (waterAnimation.progress != 1F) {
-            waterAnimation.speed = 1F
-            waterAnimation.resumeAnimation()
-        }
-    }
-
-    private fun startRemoveWaterFromGlass() {
-        if (waterAnimation.progress != 0F) {
-            waterAnimation.speed = -1F
-            waterAnimation.resumeAnimation()
-        }
-    }
-
-    private fun stopAnimateWater() {
-        waterAnimation.pauseAnimation()
-    }
 }
