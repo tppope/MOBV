@@ -16,4 +16,5 @@
     <string name="call">Zavolať</string>
     <string name="enter_phone_number">Zadajte telefónne číslo</string>
     <string name="your_firm">Váš podnik</string>
+    <string name="firm_list">Zoznam podnikov</string>
 </resources>

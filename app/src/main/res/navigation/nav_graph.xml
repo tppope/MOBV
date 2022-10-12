@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
     android:label="@string/your_firm"
-    app:startDestination="@id/firmFormFragment">
+    app:startDestination="@id/firmListFragment">
 
     <fragment
         android:id="@+id/firmFragment"
@@ -34,6 +34,14 @@
         tools:layout="@layout/fragment_firm_form">
         <action
             android:id="@+id/action_firmFormFragment_to_firmFragment"
+            app:destination="@id/firmFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/firmListFragment"
+        android:name="sk.stu.fei.mobv.FirmListFragment"
+        android:label="@string/firm_list">
+        <action
+            android:id="@+id/action_firmListFragment_to_firmFragment"
             app:destination="@id/firmFragment" />
     </fragment>
 </navigation>
