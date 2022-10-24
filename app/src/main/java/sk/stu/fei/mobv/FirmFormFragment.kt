@@ -29,12 +29,14 @@ class FirmFormFragment : Fragment() {
             val latitude = binding.latitudeEditText.text.toString()
             val longitude = binding.longitudeEditText.text.toString()
             val phoneNumber = binding.phoneNumberEditText.text.toString()
+            val webUrl = binding.webUrlEditText.text.toString()
             val action = FirmFormFragmentDirections.actionFirmFormFragmentToFirmFragment(
                 ownerName = ownerName,
                 firmName = firmName,
                 latitude = latitude,
                 longitude = longitude,
-                phoneNumber = phoneNumber
+                phoneNumber = phoneNumber,
+                webUrl = webUrl
             )
 
             view.findNavController().navigate(action)

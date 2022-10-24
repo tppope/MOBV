@@ -26,11 +26,21 @@
         <argument
             android:name="phone_number"
             app:argType="string" />
+        <argument
+            android:name="web_url"
+            app:argType="string" />
+        <argument
+            android:name="firm_id"
+            app:argType="long"
+            android:defaultValue="-1L" />
+        <action
+            android:id="@+id/action_firmFragment_to_firmListFragment"
+            app:destination="@id/firmListFragment" />
     </fragment>
     <fragment
         android:id="@+id/firmFormFragment"
         android:name="sk.stu.fei.mobv.FirmFormFragment"
-        android:label="Vaša firma"
+        android:label="@string/your_firm"
         tools:layout="@layout/fragment_firm_form">
         <action
             android:id="@+id/action_firmFormFragment_to_firmFragment"
@@ -43,5 +53,12 @@
         <action
             android:id="@+id/action_firmListFragment_to_firmFragment"
             app:destination="@id/firmFragment" />
+        <action
+            android:id="@+id/action_firmListFragment_to_firmFormFragment"
+            app:destination="@id/firmFormFragment" />
+        <argument
+            android:name="firm_id"
+            app:argType="long"
+            android:defaultValue="-1L" />
     </fragment>
 </navigation>

@@ -1,7 +1,6 @@
 package sk.stu.fei.mobv.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,16 +31,25 @@ class FirmItemAdapter(
 
     override fun onBindViewHolder(holder: FirmItemViewHolder, position: Int) {
         val firm: Firm = firmList[position]
-        holder.firmTitle.text = firm.tags?.firmName.toString()
-        holder.firmDescription.text = firm.tags?.ownerName
+        holder.firmDescription.text = firm.tags.ownerName
+
+        val firmName = if (firm.tags.firmName != null){
+            firm.tags.firmName.toString()
+        } else{
+            holder.view.resources.getString(R.string.firm_without_name)
+        }
+
+        holder.firmTitle.text = firmName
 
         holder.firmItem.setOnClickListener{
             val action = FirmListFragmentDirections.actionFirmListFragmentToFirmFragment(
-                ownerName = firm.tags?.ownerName.toString(),
-                firmName = firm.tags?.firmName.toString(),
+                ownerName = firm.tags.ownerName,
+                firmName = firmName,
                 latitude = firm.latitude.toString(),
                 longitude = firm.longitude.toString(),
-                phoneNumber = firm.tags?.phoneNumber.toString()
+                phoneNumber = firm.tags.phoneNumber.toString(),
+                webUrl = firm.tags.webUrl.toString(),
+                firmId = firm.id
             )
             holder.view.findNavController().navigate(action)
         }

@@ -17,4 +17,8 @@
     <string name="enter_phone_number">Zadajte telefónne číslo</string>
     <string name="your_firm">Váš podnik</string>
     <string name="firm_list">Zoznam podnikov</string>
+    <string name="enter_web_url">Zadajte url web stránky podniku</string>
+    <string name="add_firm">Pridať podnik</string>
+    <string name="firm_without_name">Podnik bez názvu</string>
+    <string name="action_sort_firm_list">Zoradiť zoznam podnikov</string>
 </resources>

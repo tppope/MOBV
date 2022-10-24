@@ -16,4 +16,13 @@
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/firm_list_item" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_firm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_add"
+        android:contentDescription="@string/add_firm"
+        android:layout_margin="40dp" />
+
 </FrameLayout>
