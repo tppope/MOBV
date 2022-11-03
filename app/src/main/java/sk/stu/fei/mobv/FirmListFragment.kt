@@ -1,5 +1,6 @@
 package sk.stu.fei.mobv
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.*
@@ -22,6 +23,7 @@ class FirmListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var firmItemAdapter: FirmItemAdapter
     private var sortModeFirmList: String? = null
 
     override fun onAttach(context: Context) {
@@ -61,7 +63,7 @@ class FirmListFragment : Fragment() {
                     R.id.action_switch_layout -> {
                         sortModeFirmList = when(sortModeFirmList){
                             "asc" -> "desc"
-                            "desc" -> null
+                            "desc" -> "asc"
                             else -> "asc"
                         }
                         sortFirmList()
@@ -73,7 +75,8 @@ class FirmListFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         recyclerView = binding.firmListView
-        sortFirmList()
+        firmItemAdapter = FirmItemAdapter(requireContext(), firmList!!)
+        recyclerView.adapter = firmItemAdapter
 
         binding.addFirm.setOnClickListener {
             view.findNavController()
@@ -92,13 +95,13 @@ class FirmListFragment : Fragment() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun sortFirmList() {
         when(sortModeFirmList) {
-            "asc" -> recyclerView.adapter = FirmItemAdapter(requireContext(), firmList!!.sortedBy { it.tags.firmName })
-            "desc" -> recyclerView.adapter = FirmItemAdapter(requireContext(), firmList!!.sortedByDescending { it.tags.firmName })
-            else -> recyclerView.adapter = FirmItemAdapter(requireContext(), firmList!!)
+            "asc" -> firmList!!.sortBy { it.tags.firmName }
+            else -> firmList!!.sortByDescending { it.tags.firmName }
         }
-
+        firmItemAdapter.notifyDataSetChanged()
     }
 
     companion object {
