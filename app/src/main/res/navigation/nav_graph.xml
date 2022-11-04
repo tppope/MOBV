@@ -8,47 +8,30 @@
 
     <fragment
         android:id="@+id/firmFragment"
-        android:name="sk.stu.fei.mobv.FirmFragment"
+        android:name="sk.stu.fei.mobv.ui.FirmFragment"
         android:label="@string/firm_owner_label"
         tools:layout="@layout/fragment_firm">
-        <argument
-            android:name="owner_name"
-            app:argType="string" />
-        <argument
-            android:name="firm_name"
-            app:argType="string" />
-        <argument
-            android:name="latitude"
-            app:argType="string" />
-        <argument
-            android:name="longitude"
-            app:argType="string" />
-        <argument
-            android:name="phone_number"
-            app:argType="string" />
-        <argument
-            android:name="web_url"
-            app:argType="string" />
         <argument
             android:name="firm_id"
             app:argType="long"
             android:defaultValue="-1L" />
-        <action
-            android:id="@+id/action_firmFragment_to_firmListFragment"
-            app:destination="@id/firmListFragment" />
+        <argument
+            android:name="owner_name"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/firmFormFragment"
-        android:name="sk.stu.fei.mobv.FirmFormFragment"
+        android:name="sk.stu.fei.mobv.ui.FirmFormFragment"
         android:label="@string/your_firm"
         tools:layout="@layout/fragment_firm_form">
-        <action
-            android:id="@+id/action_firmFormFragment_to_firmFragment"
-            app:destination="@id/firmFragment" />
+        <argument
+            android:name="firm_id"
+            app:argType="long"
+            android:defaultValue="-1L" />
     </fragment>
     <fragment
         android:id="@+id/firmListFragment"
-        android:name="sk.stu.fei.mobv.FirmListFragment"
+        android:name="sk.stu.fei.mobv.ui.FirmListFragment"
         android:label="@string/firm_list">
         <action
             android:id="@+id/action_firmListFragment_to_firmFragment"

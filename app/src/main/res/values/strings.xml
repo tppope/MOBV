@@ -10,7 +10,8 @@
     <string name="enter_firm_name">Zadajte názov podniku</string>
     <string name="enter_latitude">Zadajte zem. šírku podniku</string>
     <string name="enter_longitude">Zadajte zem. dĺžku podniku</string>
-    <string name="confirm">Potvrdiť</string>
+    <string name="add_firm">Pridať podnik</string>
+    <string name="edit_firm">Upraviť podnik</string>
     <string name="firm_owner_label">Firma vlastníka {owner_name}</string>
     <string name="show_on_map">Zobraziť na mape</string>
     <string name="call">Zavolať</string>
@@ -18,7 +19,8 @@
     <string name="your_firm">Váš podnik</string>
     <string name="firm_list">Zoznam podnikov</string>
     <string name="enter_web_url">Zadajte url web stránky podniku</string>
-    <string name="add_firm">Pridať podnik</string>
+    <string name="save">Uložiť</string>
+    <string name="delete">Vymazať</string>
     <string name="firm_without_name">Podnik bez názvu</string>
     <string name="action_sort_firm_list">Zoradiť zoznam podnikov</string>
 </resources>

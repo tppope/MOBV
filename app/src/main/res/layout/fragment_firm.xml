@@ -1,119 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".FirmFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="firmViewModel"
+            type="sk.stu.fei.mobv.ui.viewmodel.FirmViewModel" />
+
+        <variable
+            name="thisFragment"
+            type="sk.stu.fei.mobv.ui.FirmFragment" />
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        tools:context=".ui.FirmFragment">
 
-        <ImageView
-            android:id="@+id/delete_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:importantForAccessibility="no"
-            android:src="@drawable/ic_delete"
-            android:layout_margin="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/firm_name"
-            style="@style/Widget.MOBV.TextView.FirmName"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:maxLines="1"
-            tools:text="@string/enter_the_data" />
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/show_on_map_button"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/delete_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_delete"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/firm_name"
+                    style="@style/Widget.MOBV.TextView.FirmName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{firmViewModel.firm.name}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/enter_the_data" />
+
+                <ImageView
+                    android:id="@+id/show_on_map_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_location"
+                    app:layout_constraintEnd_toStartOf="@+id/call_button"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/firm_name" />
+
+                <ImageView
+                    android:id="@+id/call_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_call"
+                    app:layout_constraintEnd_toStartOf="@+id/show_in_browser_button"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/show_on_map_button"
+                    app:layout_constraintTop_toTopOf="@id/show_on_map_button" />
+
+                <ImageView
+                    android:id="@+id/show_in_browser_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_web"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/call_button"
+                    app:layout_constraintTop_toTopOf="@id/show_on_map_button" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animationView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/show_on_map_button"
+                    app:lottie_autoPlay="false"
+                    app:lottie_loop="false"
+                    app:lottie_rawRes="@raw/animation" />
+
+                <Button
+                    android:id="@+id/remove_button"
+                    android:layout_width="110dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="#FBC02D"
+                    android:text="@string/remove"
+                    android:textColor="#6D4C41"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/add_button"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pour_out_button" />
+
+                <Button
+                    android:id="@+id/add_button"
+                    android:layout_width="110dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="#388E3C"
+                    android:text="@string/add"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/remove_button"
+                    app:layout_constraintTop_toBottomOf="@+id/pour_out_button" />
+
+                <Button
+                    android:id="@+id/pour_out_button"
+                    android:layout_width="122dp"
+                    android:layout_height="67dp"
+                    android:backgroundTint="#C62828"
+                    android:text="@string/pour_out"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/animationView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_firm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:importantForAccessibility="no"
-            android:src="@drawable/ic_location"
-            app:layout_constraintEnd_toStartOf="@+id/call_button"
-            android:layout_marginTop="10dp"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/firm_name" />
-
-        <ImageView
-            android:id="@+id/call_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:importantForAccessibility="no"
-            android:src="@drawable/ic_call"
-            app:layout_constraintEnd_toStartOf="@+id/show_in_browser_button"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/show_on_map_button"
-            app:layout_constraintTop_toTopOf="@id/show_on_map_button" />
-
-        <ImageView
-            android:id="@+id/show_in_browser_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:importantForAccessibility="no"
-            android:src="@drawable/ic_web"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/call_button"
-            app:layout_constraintTop_toTopOf="@id/show_on_map_button" />
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animationView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/show_on_map_button"
-            app:lottie_autoPlay="false"
-            app:lottie_loop="false"
-            app:lottie_rawRes="@raw/animation" />
-
-        <Button
-            android:id="@+id/remove_button"
-            android:layout_width="110dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="#FBC02D"
-            android:text="@string/remove"
-            android:textColor="#6D4C41"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/add_button"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pour_out_button" />
-
-        <Button
-            android:id="@+id/add_button"
-            android:layout_width="110dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="#388E3C"
-            android:text="@string/add"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/remove_button"
-            app:layout_constraintTop_toBottomOf="@+id/pour_out_button" />
-
-        <Button
-            android:id="@+id/pour_out_button"
-            android:layout_width="122dp"
-            android:layout_height="67dp"
-            android:backgroundTint="#C62828"
-            android:text="@string/pour_out"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/animationView" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/ic_edit"
+            android:contentDescription="@string/edit_firm"
+            android:layout_margin="40dp"
+            />
+    </FrameLayout>
+</layout>
