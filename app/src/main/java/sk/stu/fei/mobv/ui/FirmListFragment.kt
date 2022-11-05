@@ -102,7 +102,6 @@ class FirmListFragment : Fragment() {
 
     fun sortFirmList () {
         firmViewModel.isSortAsc.value = (firmViewModel.isSortAsc.value)?.not()
-//        binding.firmListView.scrollToPosition((firmViewModel.firmList.value)!!.size -1)
     }
 
     private fun refreshDataOnStart() {

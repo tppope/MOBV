@@ -10,6 +10,7 @@ import sk.stu.fei.mobv.ui.adapter.FirmItemAdapter
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, listData: List<Firm>?) {
     val adapter = recyclerView.adapter as FirmItemAdapter
+    adapter.submitList(null)
     adapter.submitList(listData)
 }
 
