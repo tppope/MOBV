@@ -4,41 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="firmViewModel"
             type="sk.stu.fei.mobv.ui.viewmodel.FirmViewModel" />
+
         <variable
             name="thisFragment"
             type="sk.stu.fei.mobv.ui.FirmListFragment" />
     </data>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refresh_layout"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".ui.FirmListFragment">
+        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/firm_list_view"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:padding="16dp"
-            android:scrollbars="vertical"
-            app:listData="@{thisFragment.fi}"
-            app:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/firm_list_item" />
+            android:orientation="vertical"
+            tools:context=".ui.FirmListFragment">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/firm_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="16dp"
+                android:scrollbars="vertical"
+                app:layoutManager="LinearLayoutManager"
+                app:listData="@{firmViewModel.firmList}"
+                tools:listitem="@layout/firm_list_item" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_firm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            android:src="@drawable/ic_add"
-            android:contentDescription="@string/add_firm"
             android:layout_margin="40dp"
-            android:onClick="@{() -> thisFragment.goToAddFirmScreen()}"/>
+            android:contentDescription="@string/add_firm"
+            android:onClick="@{() -> thisFragment.goToAddFirmScreen()}"
+            android:src="@drawable/ic_add" />
+    </FrameLayout>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

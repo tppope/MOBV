@@ -39,18 +39,12 @@ class FirmFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var waterAnimation: LottieAnimationView
-    private var firmId: Long = -1L
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFirmBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this
         return binding.root
     }
 
@@ -61,6 +55,7 @@ class FirmFragment : Fragment() {
         binding.apply {
             firmViewModel = this@FirmFragment.firmViewModel
             thisFragment = this@FirmFragment
+            lifecycleOwner = this@FirmFragment
         }
 
         waterAnimation = binding.animationView
@@ -87,11 +82,10 @@ class FirmFragment : Fragment() {
             }
             true
         }
-        binding.pourOutButton.setOnClickListener { pourOutGlass() }
 
     }
 
-    private fun pourOutGlass() {
+    fun pourOutGlass() {
         if (waterAnimation.progress != 0F) {
             waterAnimation.speed = -5F
             waterAnimation.resumeAnimation()
@@ -122,7 +116,34 @@ class FirmFragment : Fragment() {
     }
 
     fun goToEditFirmScreen() {
-        findNavController().navigate()
+        findNavController().navigate(
+            FirmFragmentDirections.actionFirmFragmentToFirmFormFragment(
+                navigationArgs.firmId
+            )
+        )
+    }
+
+    fun showOnMapIntent(latitude: String, longitude: String) {
+        context?.startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("geo:${latitude},${longitude}")
+            )
+        )
+
+    }
+
+    fun callPhoneNumberIntent(phoneNumber: String) {
+        context?.startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:${phoneNumber}")))
+    }
+
+    fun showWebPageIntent(uriWeb: String) {
+        if (uriWeb.startsWith("https://") || uriWeb.startsWith("http://")) {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uriWeb))
+            context?.startActivity(intent)
+        } else {
+            Toast.makeText(context, "Invalid Url", Toast.LENGTH_SHORT).show()
+        }
     }
 
     companion object {

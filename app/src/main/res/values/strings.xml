@@ -6,7 +6,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="enter_the_data">Zadajte údaje</string>
-    <string name="enter_owner_name">Zadajte Meno</string>
+    <string name="enter_owner_name">Zadajte meno majiteľa</string>
     <string name="enter_firm_name">Zadajte názov podniku</string>
     <string name="enter_latitude">Zadajte zem. šírku podniku</string>
     <string name="enter_longitude">Zadajte zem. dĺžku podniku</string>
@@ -21,6 +21,16 @@
     <string name="enter_web_url">Zadajte url web stránky podniku</string>
     <string name="save">Uložiť</string>
     <string name="delete">Vymazať</string>
-    <string name="firm_without_name">Podnik bez názvu</string>
+    <string name="firm_without_name">Chýbajúce meno podniku</string>
+    <string name="firm_without_owner">Chýbajúce meno majiteľa</string>
     <string name="action_sort_firm_list">Zoradiť zoznam podnikov</string>
+    <string name="latitude">Zem. šírka</string>
+    <string name="longitude">Zem. dĺžka</string>
+    <string name="is_required">Je potrebné zadať %s</string>
+
+    <string-array name='firm_types'>
+        <item>bar</item>
+        <item>pub</item>
+        <item>nightclub</item>
+    </string-array>
 </resources>

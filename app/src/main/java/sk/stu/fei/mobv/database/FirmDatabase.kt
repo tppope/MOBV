@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import sk.stu.fei.mobv.database.firm.DatabaseFirm
 import sk.stu.fei.mobv.database.firm.FirmDao
 
-@Database(entities = [DatabaseFirm::class], version = 1, exportSchema = false)
+@Database(entities = [DatabaseFirm::class], version = 2, exportSchema = false)
 abstract class FirmDatabase : RoomDatabase() {
     abstract fun firmDao(): FirmDao
 

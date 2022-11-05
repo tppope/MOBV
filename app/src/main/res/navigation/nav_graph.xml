@@ -18,6 +18,9 @@
         <argument
             android:name="owner_name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_firmFragment_to_firmFormFragment"
+            app:destination="@id/firmFormFragment" />
     </fragment>
     <fragment
         android:id="@+id/firmFormFragment"
@@ -28,20 +31,20 @@
             android:name="firm_id"
             app:argType="long"
             android:defaultValue="-1L" />
+        <action
+            android:id="@+id/action_firmFormFragment_to_firmListFragment"
+            app:destination="@id/firmListFragment" />
     </fragment>
     <fragment
         android:id="@+id/firmListFragment"
         android:name="sk.stu.fei.mobv.ui.FirmListFragment"
-        android:label="@string/firm_list">
+        android:label="@string/firm_list"
+        tools:layout="@layout/fragment_firm_list">
         <action
             android:id="@+id/action_firmListFragment_to_firmFragment"
             app:destination="@id/firmFragment" />
         <action
             android:id="@+id/action_firmListFragment_to_firmFormFragment"
             app:destination="@id/firmFormFragment" />
-        <argument
-            android:name="firm_id"
-            app:argType="long"
-            android:defaultValue="-1L" />
     </fragment>
 </navigation>

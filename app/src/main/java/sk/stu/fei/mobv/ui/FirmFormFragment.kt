@@ -1,20 +1,26 @@
 package sk.stu.fei.mobv.ui
 
+import android.icu.number.Notation.simple
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import sk.stu.fei.mobv.R
 import sk.stu.fei.mobv.databinding.FragmentFirmFormBinding
 import sk.stu.fei.mobv.domain.Firm
 import sk.stu.fei.mobv.ui.viewmodel.FirmViewModel
 import sk.stu.fei.mobv.ui.viewmodel.factory.FirmViewModelFactory
 
 class FirmFormFragment : Fragment() {
-    private val navigationArgs: FirmFragmentArgs by navArgs()
+    private val navigationArgs: FirmFormFragmentArgs by navArgs()
 
     private val firmViewModel: FirmViewModel by lazy {
         val activity = requireNotNull(this.activity) {
@@ -41,8 +47,9 @@ class FirmFormFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        fillFirmTypes()
         val firmId = navigationArgs.firmId
-        if (id > 0) {
+        if (firmId > 0) {
             firmViewModel.getFirm(firmId).observe(this.viewLifecycleOwner) { firm ->
                 this.firm = firm
                 bindFirm()
@@ -57,6 +64,15 @@ class FirmFormFragment : Fragment() {
                 addFirm()
             }
         }
+    }
+
+    private fun fillFirmTypes() {
+        val spinner = binding.firmType
+        spinner.adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_dropdown_item_1line,
+            resources.getStringArray(R.array.firm_types)
+        )
     }
 
     private fun bindFirm() {
@@ -75,22 +91,64 @@ class FirmFormFragment : Fragment() {
 
     private fun deleteFirm() {
         firmViewModel.deleteFirm(firm)
+        goToFirmListScreen()
     }
 
     private fun addFirm() {
-        firmViewModel.addFirm(
-            Firm(
-
+        if (validateEntry()) {
+            firmViewModel.addFirm(
+                binding.run {
+                    Firm(
+                        name = firmNameEditText.text.toString(),
+                        ownerName = ownerNameEditText.text.toString(),
+                        type = firmType.selectedItem.toString(),
+                        latitude = latitudeEditText.text.toString(),
+                        longitude = longitudeEditText.text.toString(),
+                        phoneNumber = phoneNumberEditText.text.toString(),
+                        webPage = webUrlEditText.text.toString()
+                    )
+                }
             )
-        )
+            goToFirmListScreen()
+        }
     }
 
     private fun updateFirm() {
-        firmViewModel.editFirm(
-            Firm(
-                id = navigationArgs.firmId,
+        if (validateEntry()) {
+            firmViewModel.editFirm(
+                binding.run {
+                    Firm(
+                        id = navigationArgs.firmId,
+                        name = firmNameEditText.text.toString(),
+                        ownerName = ownerNameEditText.text.toString(),
+                        type = firmType.selectedItem.toString(),
+                        latitude = latitudeEditText.text.toString(),
+                        longitude = longitudeEditText.text.toString(),
+                        phoneNumber = phoneNumberEditText.text.toString(),
+                        webPage = webUrlEditText.text.toString()
+                    )
+                }
             )
+            goToFirmListScreen()
+        }
+    }
+
+    private fun goToFirmListScreen() {
+        findNavController().navigate(R.id.action_firmFormFragment_to_firmListFragment)
+    }
+
+    private fun validateEntry(): Boolean {
+        val entryErrorMessage = firmViewModel.validateEntry(
+            binding.latitudeEditText.text.toString(),
+            binding.longitudeEditText.text.toString(),
         )
+
+        if (entryErrorMessage.isNotEmpty()) {
+            Toast.makeText(requireContext(), entryErrorMessage, Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        return true
     }
 
 }

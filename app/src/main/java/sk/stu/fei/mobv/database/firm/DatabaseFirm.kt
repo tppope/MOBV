@@ -16,9 +16,9 @@ data class DatabaseFirm(
     @ColumnInfo(name = "owner_name")
     val ownerName: String?,
     @ColumnInfo(name = "latitude")
-    val latitude: String?,
+    val latitude: String,
     @ColumnInfo(name = "longitude")
-    val longitude: String?,
+    val longitude: String,
     @ColumnInfo(name = "phone_number")
     val phoneNumber: String?,
     @ColumnInfo(name = "web")

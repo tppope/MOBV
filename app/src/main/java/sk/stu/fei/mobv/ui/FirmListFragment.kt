@@ -37,14 +37,11 @@ class FirmListFragment : Fragment() {
         )[FirmViewModel::class.java]
     }
 
-    private var sortModeFirmList: String? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFirmListBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this
         return binding.root
     }
 
@@ -73,11 +70,7 @@ class FirmListFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.action_switch_layout -> {
-                        sortModeFirmList = when (sortModeFirmList) {
-                            "asc" -> "desc"
-                            "desc" -> "asc"
-                            else -> "asc"
-                        }
+                        sortFirmList()
                         return true
                     }
                     else -> false
@@ -90,6 +83,7 @@ class FirmListFragment : Fragment() {
         binding.apply {
             firmViewModel = this@FirmListFragment.firmViewModel
             thisFragment = this@FirmListFragment
+            binding.lifecycleOwner = this@FirmListFragment
             firmListView.adapter = FirmItemAdapter(
                 FirmEventListener {ownerName: String, firmId: Long ->
                 findNavController()
@@ -107,6 +101,10 @@ class FirmListFragment : Fragment() {
 
     fun goToAddFirmScreen() {
         findNavController().navigate(R.id.action_firmListFragment_to_firmFormFragment)
+    }
+
+    fun sortFirmList () {
+        firmViewModel.isSortAsc.value = (firmViewModel.isSortAsc.value)?.not()
     }
 
     private fun refreshDataOnStart() {

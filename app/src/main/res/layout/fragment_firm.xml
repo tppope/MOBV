@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="firmViewModel"
             type="sk.stu.fei.mobv.ui.viewmodel.FirmViewModel" />
@@ -27,16 +29,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/delete_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:importantForAccessibility="no"
-                    android:src="@drawable/ic_delete"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
                 <TextView
                     android:id="@+id/firm_name"
                     style="@style/Widget.MOBV.TextView.FirmName"
@@ -46,39 +38,47 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="@string/enter_the_data" />
 
-                <ImageView
+
+                <TextView
+                    android:id="@+id/phone_number"
+                    style="@style/Widget.MOBV.TextView.FirmInfoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:onClick="@{() -> thisFragment.callPhoneNumberIntent(firmViewModel.firm.phoneNumber)}"
+                    android:text="@{firmViewModel.firm.phoneNumber}"
+                    android:visibility="@{firmViewModel.firm.phoneNumber != null ? View.VISIBLE: View.GONE}"
+                    app:drawableLeftCompat="@drawable/ic_call"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/firm_name"
+                    tools:text="@string/enter_the_data" />
+
+
+                <TextView
+                    android:id="@+id/web_page"
+                    style="@style/Widget.MOBV.TextView.FirmInfoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:onClick="@{() -> thisFragment.showWebPageIntent(firmViewModel.firm.webPage)}"
+                    android:text="@{firmViewModel.firm.webPage}"
+                    android:visibility="@{firmViewModel.firm.webPage != null ? View.VISIBLE: View.GONE}"
+                    app:drawableLeftCompat="@drawable/ic_web"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/phone_number"
+                    tools:text="@string/enter_the_data" />
+
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/show_on_map_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:importantForAccessibility="no"
-                    android:src="@drawable/ic_location"
-                    app:layout_constraintEnd_toStartOf="@+id/call_button"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/firm_name" />
-
-                <ImageView
-                    android:id="@+id/call_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:importantForAccessibility="no"
-                    android:src="@drawable/ic_call"
-                    app:layout_constraintEnd_toStartOf="@+id/show_in_browser_button"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/show_on_map_button"
-                    app:layout_constraintTop_toTopOf="@id/show_on_map_button" />
-
-                <ImageView
-                    android:id="@+id/show_in_browser_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:importantForAccessibility="no"
-                    android:src="@drawable/ic_web"
+                    android:onClick="@{() -> thisFragment.showOnMapIntent(firmViewModel.firm.latitude, firmViewModel.firm.longitude)}"
+                    android:text="@string/show_on_map"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/call_button"
-                    app:layout_constraintTop_toTopOf="@id/show_on_map_button" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/web_page" />
+
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/animationView"
@@ -125,6 +125,7 @@
                     android:layout_width="122dp"
                     android:layout_height="67dp"
                     android:backgroundTint="#C62828"
+                    android:onClick="@{() -> thisFragment.pourOutGlass()}"
                     android:text="@string/pour_out"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -136,13 +137,13 @@
         </ScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/add_firm"
+            android:id="@+id/edit_firm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            android:src="@drawable/ic_edit"
-            android:contentDescription="@string/edit_firm"
             android:layout_margin="40dp"
-            />
+            android:contentDescription="@string/edit_firm"
+            android:onClick="@{() -> thisFragment.goToEditFirmScreen()}"
+            android:src="@drawable/ic_edit" />
     </FrameLayout>
 </layout>

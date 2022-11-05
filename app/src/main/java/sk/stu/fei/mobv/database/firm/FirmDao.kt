@@ -9,8 +9,11 @@ interface FirmDao {
     @Query("SELECT * from firms WHERE id = :id")
     fun getFirm(id: Long): Flow<DatabaseFirm>
 
-    @Query("SELECT * from firms")
-    fun getAllFirms(): Flow<List<DatabaseFirm>>
+    @Query("SELECT * from firms ORDER BY name ASC")
+    fun getAllFirmsAsc(): Flow<List<DatabaseFirm>>
+
+    @Query("SELECT * from firms ORDER BY name DESC")
+    fun getAllFirmsDesc(): Flow<List<DatabaseFirm>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(firm: DatabaseFirm)

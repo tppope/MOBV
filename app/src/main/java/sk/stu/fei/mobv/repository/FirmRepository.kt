@@ -15,7 +15,11 @@ import sk.stu.fei.mobv.domain.Firm
 import sk.stu.fei.mobv.network.*
 
 class FirmRepository(private val database: FirmDatabase) {
-    val firmList: LiveData<List<Firm>> = Transformations.map(database.firmDao().getAllFirms().asLiveData()) {
+    fun getFirmListAsc(): LiveData<List<Firm>> = Transformations.map(database.firmDao().getAllFirmsAsc().asLiveData()) {
+        it.asDomainModel()
+    }
+
+    fun getFirmListDesc(): LiveData<List<Firm>> = Transformations.map(database.firmDao().getAllFirmsDesc().asLiveData()) {
         it.asDomainModel()
     }
 
