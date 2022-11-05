@@ -1,8 +1,6 @@
 package sk.stu.fei.mobv.ui
 
-import android.icu.number.Notation.simple
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import sk.stu.fei.mobv.R
@@ -109,6 +106,7 @@ class FirmFormFragment : Fragment() {
                     )
                 }
             )
+            showSuccessMessage(getString(R.string.succesfully_added))
             goToFirmListScreen()
         }
     }
@@ -129,12 +127,17 @@ class FirmFormFragment : Fragment() {
                     )
                 }
             )
+            showSuccessMessage(getString(R.string.succesfully_updated))
             goToFirmListScreen()
         }
     }
 
     private fun goToFirmListScreen() {
         findNavController().navigate(R.id.action_firmFormFragment_to_firmListFragment)
+    }
+
+    private fun showSuccessMessage(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
     private fun validateEntry(): Boolean {

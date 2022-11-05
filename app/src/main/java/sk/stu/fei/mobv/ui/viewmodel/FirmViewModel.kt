@@ -1,7 +1,7 @@
 package sk.stu.fei.mobv.ui.viewmodel
 
 import android.app.Application
-import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import sk.stu.fei.mobv.R
@@ -100,7 +100,11 @@ class FirmViewModel(
                 settingsDataStore.saveIsFirmRefreshedPreferencesStore(true)
 
             } catch (networkError: IOException) {
-                Log.d("AHOJ", "Refreshingerrr")
+                Toast.makeText(
+                    application,
+                    application.getString(R.string.network_error),
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }

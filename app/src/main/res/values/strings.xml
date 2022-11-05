@@ -27,6 +27,9 @@
     <string name="latitude">Zem. šírka</string>
     <string name="longitude">Zem. dĺžka</string>
     <string name="is_required">Je potrebné zadať %s</string>
+    <string name="succesfully_added">Podnik bol úspešne pridaný.</string>
+    <string name="succesfully_updated">Podnik bol úspešne upravený.</string>
+    <string name="network_error">Problém s internetom.</string>
 
     <string-array name='firm_types'>
         <item>bar</item>

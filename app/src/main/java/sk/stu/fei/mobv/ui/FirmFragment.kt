@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.SimPhonebookContract.SimRecords.PHONE_NUMBER
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -12,11 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.airbnb.lottie.LottieAnimationView
-import sk.stu.fei.mobv.R
 import sk.stu.fei.mobv.databinding.FragmentFirmBinding
 import sk.stu.fei.mobv.ui.viewmodel.FirmViewModel
 import sk.stu.fei.mobv.ui.viewmodel.factory.FirmViewModelFactory
@@ -144,10 +141,5 @@ class FirmFragment : Fragment() {
         } else {
             Toast.makeText(context, "Invalid Url", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    companion object {
-        val GEO_PREFIX = "geo:%s,%s"
-        val TEL_PREFIX = "tel:%s"
     }
 }

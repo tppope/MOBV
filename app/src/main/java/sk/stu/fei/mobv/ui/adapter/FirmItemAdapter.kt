@@ -2,12 +2,9 @@ package sk.stu.fei.mobv.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import sk.stu.fei.mobv.R
 import sk.stu.fei.mobv.databinding.FirmListItemBinding
 import sk.stu.fei.mobv.domain.Firm
 

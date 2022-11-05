@@ -1,12 +1,9 @@
 package sk.stu.fei.mobv.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import sk.stu.fei.mobv.database.FirmDatabase
 import sk.stu.fei.mobv.database.firm.DatabaseFirm

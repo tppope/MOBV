@@ -17,10 +17,7 @@ import sk.stu.fei.mobv.ui.adapter.FirmEventListener
 import sk.stu.fei.mobv.ui.viewmodel.FirmViewModel
 import sk.stu.fei.mobv.ui.viewmodel.factory.FirmViewModelFactory
 
-private const val FIRM_ID = "firm_id"
-
 class FirmListFragment : Fragment() {
-
     private var _binding: FragmentFirmListBinding? = null
     private val binding get() = _binding!!
 
@@ -105,6 +102,7 @@ class FirmListFragment : Fragment() {
 
     fun sortFirmList () {
         firmViewModel.isSortAsc.value = (firmViewModel.isSortAsc.value)?.not()
+//        binding.firmListView.scrollToPosition((firmViewModel.firmList.value)!!.size -1)
     }
 
     private fun refreshDataOnStart() {
