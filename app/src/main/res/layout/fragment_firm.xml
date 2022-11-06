@@ -6,6 +6,7 @@
     <data>
 
         <import type="android.view.View" />
+        <import type="android.text.TextUtils"/>
 
         <variable
             name="firmViewModel"
@@ -34,7 +35,7 @@
                     style="@style/Widget.MOBV.TextView.FirmName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{firmViewModel.firm.name}"
+                    android:text="@{firmViewModel.firm.name ?? @string/firm_without_name}"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="@string/enter_the_data" />
 
@@ -47,7 +48,7 @@
                     android:drawablePadding="10dp"
                     android:onClick="@{() -> thisFragment.callPhoneNumberIntent(firmViewModel.firm.phoneNumber)}"
                     android:text="@{firmViewModel.firm.phoneNumber}"
-                    android:visibility="@{firmViewModel.firm.phoneNumber != null ? View.VISIBLE: View.GONE}"
+                    android:visibility="@{TextUtils.isEmpty(firmViewModel.firm.phoneNumber) ? View.GONE: View.VISIBLE}"
                     app:drawableLeftCompat="@drawable/ic_call"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/firm_name"
@@ -62,7 +63,7 @@
                     android:drawablePadding="10dp"
                     android:onClick="@{() -> thisFragment.showWebPageIntent(firmViewModel.firm.webPage)}"
                     android:text="@{firmViewModel.firm.webPage}"
-                    android:visibility="@{firmViewModel.firm.webPage != null ? View.VISIBLE: View.GONE}"
+                    android:visibility="@{TextUtils.isEmpty(firmViewModel.firm.webPage) ? View.GONE: View.VISIBLE}"
                     app:drawableLeftCompat="@drawable/ic_web"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/phone_number"

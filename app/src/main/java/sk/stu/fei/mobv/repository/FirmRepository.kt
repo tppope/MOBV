@@ -1,54 +1,55 @@
 package sk.stu.fei.mobv.repository
 
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import sk.stu.fei.mobv.database.FirmDatabase
 import sk.stu.fei.mobv.database.firm.DatabaseFirm
+import sk.stu.fei.mobv.database.firm.FirmDao
 import sk.stu.fei.mobv.database.firm.asDomainModel
 import sk.stu.fei.mobv.domain.Firm
 import sk.stu.fei.mobv.network.*
 
-class FirmRepository(private val database: FirmDatabase) {
-    fun getFirmListAsc(): LiveData<List<Firm>> = Transformations.map(database.firmDao().getAllFirmsAsc().asLiveData()) {
+class FirmRepository(private val firmDao: FirmDao) {
+    fun getFirmListAsc(): LiveData<List<Firm>> = Transformations.map(firmDao.getAllFirmsAsc().asLiveData()) {
         it.asDomainModel()
     }
 
-    fun getFirmListDesc(): LiveData<List<Firm>> = Transformations.map(database.firmDao().getAllFirmsDesc().asLiveData()) {
+    fun getFirmListDesc(): LiveData<List<Firm>> = Transformations.map(firmDao.getAllFirmsDesc().asLiveData()) {
         it.asDomainModel()
     }
 
     fun getFirm(firmId: Long): LiveData<Firm> {
-        return Transformations.map(database.firmDao().getFirm(firmId).asLiveData()) {
+        return Transformations.map(firmDao.getFirm(firmId).asLiveData()) {
             it.asDomainModel()
         }
     }
 
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
     suspend fun addFirm(databaseFirm: DatabaseFirm) {
-        withContext(Dispatchers.IO) {
-            database.firmDao().insert(databaseFirm)
-        }
+        firmDao.insert(databaseFirm)
     }
 
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
     suspend fun editFirm(databaseFirm: DatabaseFirm) {
-        withContext(Dispatchers.IO) {
-            database.firmDao().update(databaseFirm)
-        }
+        firmDao.update(databaseFirm)
     }
 
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
     suspend fun deleteFirm(databaseFirm: DatabaseFirm) {
-        withContext(Dispatchers.IO) {
-            database.firmDao().delete(databaseFirm)
-        }
+        firmDao.delete(databaseFirm)
     }
 
 
     suspend fun refreshFirmList() {
         withContext(Dispatchers.IO) {
             val firmContainer: FirmContainerDto = FirmApi.retrofitService.getFirms()
-            database.firmDao().insertAll(firmContainer.asDatabaseModel())
+            firmDao.insertAll(firmContainer.asDatabaseModel())
         }
     }
 }

@@ -15,13 +15,13 @@ data class Firm(
     fun asDatabaseModel(): DatabaseFirm {
         return DatabaseFirm(
             id = id,
-            name = name,
+            name = if (name.isNullOrEmpty()) null else name,
             type = type,
-            ownerName = ownerName,
+            ownerName = if (ownerName.isNullOrEmpty()) null else ownerName,
             latitude = latitude,
             longitude = longitude,
-            phoneNumber = phoneNumber,
-            webPage = webPage
+            phoneNumber = if (phoneNumber.isNullOrEmpty()) null else phoneNumber,
+            webPage = if (webPage.isNullOrEmpty()) null else webPage
         )
     }
 }

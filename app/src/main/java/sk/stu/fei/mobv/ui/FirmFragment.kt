@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.airbnb.lottie.LottieAnimationView
+import sk.stu.fei.mobv.MainApplication
 import sk.stu.fei.mobv.databinding.FragmentFirmBinding
 import sk.stu.fei.mobv.ui.viewmodel.FirmViewModel
 import sk.stu.fei.mobv.ui.viewmodel.factory.FirmViewModelFactory
@@ -28,7 +29,7 @@ class FirmFragment : Fragment() {
         }
         ViewModelProvider(
             this,
-            FirmViewModelFactory(activity.application)
+            FirmViewModelFactory((activity.application as MainApplication).repository)
         )[FirmViewModel::class.java]
     }
 

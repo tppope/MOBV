@@ -2,13 +2,17 @@ package sk.stu.fei.mobv.ui
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
+import sk.stu.fei.mobv.MainApplication
 import sk.stu.fei.mobv.R
 import sk.stu.fei.mobv.ui.adapter.FirmItemAdapter
 import sk.stu.fei.mobv.data.SettingsDataStore
@@ -30,7 +34,7 @@ class FirmListFragment : Fragment() {
         }
         ViewModelProvider(
             this,
-            FirmViewModelFactory(activity.application)
+            FirmViewModelFactory((activity.application as MainApplication).repository)
         )[FirmViewModel::class.java]
     }
 
@@ -43,6 +47,12 @@ class FirmListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        settingsDataStore = SettingsDataStore(requireContext())
+
+        firmViewModel.networkError.observe(this.viewLifecycleOwner) { isNetworkError ->
+            isNetworkError?.let { handleRefreshResult(it) }
+        }
+
         setMenuBar()
 
         refreshDataOnStart()
@@ -82,13 +92,15 @@ class FirmListFragment : Fragment() {
             thisFragment = this@FirmListFragment
             binding.lifecycleOwner = this@FirmListFragment
             firmListView.adapter = FirmItemAdapter(
-                FirmEventListener {ownerName: String, firmId: Long ->
-                findNavController()
-                    .navigate(FirmListFragmentDirections.actionFirmListFragmentToFirmFragment(
-                        firmId = firmId,
-                        ownerName = ownerName
-                    ))
-            })
+                FirmEventListener { ownerName: String?, firmId: Long ->
+                    findNavController()
+                        .navigate(
+                            FirmListFragmentDirections.actionFirmListFragmentToFirmFragment(
+                                firmId = firmId,
+                                ownerName = ownerName ?: ""
+                            )
+                        )
+                })
             refreshLayout.setOnRefreshListener {
                 this@FirmListFragment.firmViewModel.refreshDataFromRepository()
                 refreshLayout.isRefreshing = false
@@ -100,12 +112,27 @@ class FirmListFragment : Fragment() {
         findNavController().navigate(R.id.action_firmListFragment_to_firmFormFragment)
     }
 
-    fun sortFirmList () {
+    private fun sortFirmList() {
         firmViewModel.isSortAsc.value = (firmViewModel.isSortAsc.value)?.not()
     }
 
+    private fun handleRefreshResult(isNetworkError: Boolean) {
+        if (isNetworkError) {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.network_error),
+                Toast.LENGTH_LONG
+            ).show()
+        } else {
+            lifecycleScope.launch {
+                settingsDataStore.saveIsFirmRefreshedPreferencesStore(true)
+            }
+        }
+    }
+
+
+
     private fun refreshDataOnStart() {
-        settingsDataStore = SettingsDataStore(requireContext())
         settingsDataStore.refreshDataPreferences.asLiveData()
             .observe(viewLifecycleOwner) { isFirmsRefreshed ->
                 if (!isFirmsRefreshed) {
@@ -113,7 +140,6 @@ class FirmListFragment : Fragment() {
                 }
             }
     }
-
 
 
 }

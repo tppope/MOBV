@@ -17,7 +17,8 @@
             android:defaultValue="-1L" />
         <argument
             android:name="owner_name"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true" />
         <action
             android:id="@+id/action_firmFragment_to_firmFormFragment"
             app:destination="@id/firmFormFragment" />
@@ -33,7 +34,14 @@
             android:defaultValue="-1L" />
         <action
             android:id="@+id/action_firmFormFragment_to_firmListFragment"
-            app:destination="@id/firmListFragment" />
+            app:destination="@id/firmListFragment"
+            app:popUpTo="@id/firmListFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_firmFormFragment_to_firmFragment"
+            app:destination="@id/firmFragment"
+            app:popUpTo="@id/firmFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/firmListFragment"

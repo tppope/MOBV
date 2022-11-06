@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import sk.stu.fei.mobv.MainApplication
 import sk.stu.fei.mobv.R
 import sk.stu.fei.mobv.databinding.FragmentFirmFormBinding
 import sk.stu.fei.mobv.domain.Firm
@@ -25,7 +26,7 @@ class FirmFormFragment : Fragment() {
         }
         ViewModelProvider(
             this,
-            FirmViewModelFactory(activity.application)
+            FirmViewModelFactory((activity.application as MainApplication).repository)
         )[FirmViewModel::class.java]
     }
 
@@ -128,7 +129,7 @@ class FirmFormFragment : Fragment() {
                 }
             )
             showSuccessMessage(getString(R.string.succesfully_updated))
-            goToFirmListScreen()
+            goToFirmScreen()
         }
     }
 
@@ -136,22 +137,46 @@ class FirmFormFragment : Fragment() {
         findNavController().navigate(R.id.action_firmFormFragment_to_firmListFragment)
     }
 
+    private fun goToFirmScreen() {
+        findNavController().navigate(
+            FirmFormFragmentDirections.actionFirmFormFragmentToFirmFragment(
+                binding.ownerNameEditText.text.toString().ifEmpty { "" },
+                navigationArgs.firmId
+            )
+        )
+    }
+
     private fun showSuccessMessage(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
     private fun validateEntry(): Boolean {
-        val entryErrorMessage = firmViewModel.validateEntry(
+        val entryErrorResources: MutableList<Int> = firmViewModel.validateEntry(
             binding.latitudeEditText.text.toString(),
             binding.longitudeEditText.text.toString(),
         )
 
-        if (entryErrorMessage.isNotEmpty()) {
-            Toast.makeText(requireContext(), entryErrorMessage, Toast.LENGTH_SHORT).show()
+        if (entryErrorResources.isNotEmpty()) {
+
+            Toast.makeText(
+                requireContext(),
+                makeEntryErrorMessage(entryErrorResources),
+                Toast.LENGTH_SHORT
+            ).show()
             return false
         }
 
         return true
+    }
+
+    private fun makeEntryErrorMessage(entryErrorResources: MutableList<Int>): String {
+        var errorEntryMessage = getString(entryErrorResources.removeAt(0))
+
+        entryErrorResources.forEach {
+            errorEntryMessage += ", " + getString(it)
+        }
+
+        return getString(R.string.is_required, errorEntryMessage)
     }
 
 }

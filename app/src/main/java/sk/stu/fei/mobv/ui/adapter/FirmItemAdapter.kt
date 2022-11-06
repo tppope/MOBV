@@ -47,6 +47,6 @@ class FirmItemAdapter(
 
 }
 
-class FirmEventListener(val clickListener: (ownerName: String, firmId: Long) -> Unit) {
-    fun onClick(ownerName: String, firmId: Long) = clickListener(ownerName, firmId)
+class FirmEventListener(val clickListener: (ownerName: String?, firmId: Long) -> Unit) {
+    fun onClick(ownerName: String?, firmId: Long) = clickListener(ownerName, firmId)
 }
