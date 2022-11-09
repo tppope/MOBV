@@ -35,6 +35,12 @@ class FirmFormFragment : Fragment() {
     private val binding get() = _binding!!
 
     lateinit var firm: Firm
+    private val firmTypesSelection: Map<String, Int> =
+        mapOf(
+            "bar" to 0,
+            "pub" to 1,
+            "nightclub" to 2
+        )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,6 +83,7 @@ class FirmFormFragment : Fragment() {
         binding.apply {
             firmNameEditText.setText(firm.name)
             ownerNameEditText.setText(firm.ownerName)
+            firmTypesSelection[firm.type]?.let { firmType.setSelection(it) }
             latitudeEditText.setText(firm.latitude)
             longitudeEditText.setText(firm.longitude)
             phoneNumberEditText.setText(firm.phoneNumber)
