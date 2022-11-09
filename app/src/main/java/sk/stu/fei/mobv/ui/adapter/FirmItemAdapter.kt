@@ -11,6 +11,7 @@ import sk.stu.fei.mobv.domain.Firm
 class FirmItemAdapter(
     private val firmEventListener: FirmEventListener
 ) : ListAdapter<Firm, FirmItemAdapter.FirmItemViewHolder>(DiffCallback) {
+
     class FirmItemViewHolder(var binding: FirmListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(firmEventListener: FirmEventListener, firm: Firm) {
