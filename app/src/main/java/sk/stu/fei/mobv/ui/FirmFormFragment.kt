@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import sk.stu.fei.mobv.MainApplication
 import sk.stu.fei.mobv.R
 import sk.stu.fei.mobv.databinding.FragmentFirmFormBinding
@@ -39,7 +40,6 @@ class FirmFormFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentFirmFormBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -55,7 +55,7 @@ class FirmFormFragment : Fragment() {
 
             binding.deleteButton.visibility = View.VISIBLE
             binding.deleteButton.setOnClickListener {
-                deleteFirm()
+                showDeleteFirmConfirmationDialog()
             }
         } else {
             binding.saveButton.setOnClickListener {
