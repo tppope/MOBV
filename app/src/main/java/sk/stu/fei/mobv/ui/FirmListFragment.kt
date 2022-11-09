@@ -113,7 +113,7 @@ class FirmListFragment : Fragment() {
     }
 
     private fun sortFirmList() {
-        firmViewModel.isSortAsc.value = (firmViewModel.isSortAsc.value)?.not()
+        firmViewModel.sortFirmList()
     }
 
     private fun handleRefreshResult(isNetworkError: Boolean) {

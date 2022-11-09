@@ -17,8 +17,6 @@ class FirmViewModel(
         get() = _networkError
 
     private var _isSortAsc: MutableLiveData<Boolean> = MutableLiveData(true)
-    val isSortAsc: MutableLiveData<Boolean>
-        get() = _isSortAsc
 
     val firmList: LiveData<List<Firm>> = Transformations.switchMap(_isSortAsc) { sort ->
         if (sort) firmRepository.getFirmListAsc() else firmRepository.getFirmListDesc()
@@ -48,6 +46,10 @@ class FirmViewModel(
         viewModelScope.launch {
             firmRepository.deleteFirm(firm.asDatabaseModel())
         }
+    }
+
+    fun sortFirmList(){
+        _isSortAsc.value = (_isSortAsc.value)?.not()
     }
 
     fun validateEntry(latitude: String, longitude: String): MutableList<Int> {
