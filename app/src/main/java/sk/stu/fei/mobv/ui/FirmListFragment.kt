@@ -90,7 +90,7 @@ class FirmListFragment : Fragment() {
         binding.apply {
             firmViewModel = this@FirmListFragment.firmViewModel
             thisFragment = this@FirmListFragment
-            binding.lifecycleOwner = this@FirmListFragment
+            lifecycleOwner = this@FirmListFragment.viewLifecycleOwner
             firmListView.adapter = FirmItemAdapter(
                 FirmEventListener { ownerName: String?, firmId: Long ->
                     findNavController()
