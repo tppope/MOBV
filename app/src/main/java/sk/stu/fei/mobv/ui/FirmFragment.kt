@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.airbnb.lottie.LottieAnimationView
 import sk.stu.fei.mobv.MainApplication
+import sk.stu.fei.mobv.R
 import sk.stu.fei.mobv.databinding.FragmentFirmBinding
 import sk.stu.fei.mobv.ui.viewmodel.FirmViewModel
 import sk.stu.fei.mobv.ui.viewmodel.factory.FirmViewModelFactory
@@ -140,7 +141,7 @@ class FirmFragment : Fragment() {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uriWeb))
             context?.startActivity(intent)
         } else {
-            Toast.makeText(context, "Invalid Url", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.invalid_url), Toast.LENGTH_SHORT).show()
         }
     }
 }
