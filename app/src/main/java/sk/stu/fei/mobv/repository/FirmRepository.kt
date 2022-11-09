@@ -1,6 +1,5 @@
 package sk.stu.fei.mobv.repository
 
-import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
@@ -27,20 +26,14 @@ class FirmRepository(private val firmDao: FirmDao) {
         }
     }
 
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
     suspend fun addFirm(databaseFirm: DatabaseFirm) {
         firmDao.insert(databaseFirm)
     }
 
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
     suspend fun editFirm(databaseFirm: DatabaseFirm) {
         firmDao.update(databaseFirm)
     }
 
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
     suspend fun deleteFirm(databaseFirm: DatabaseFirm) {
         firmDao.delete(databaseFirm)
     }
