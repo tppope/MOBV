@@ -12,7 +12,7 @@
     <string name="enter_longitude">Zadajte zem. dĺžku podniku</string>
     <string name="add_firm">Pridať podnik</string>
     <string name="edit_firm">Upraviť podnik</string>
-    <string name="firm_owner_label">Firma vlastníka {owner_name}</string>
+    <string name="firm_owner_label">Podnik vlastníka {owner_name}</string>
     <string name="show_on_map">Zobraziť na mape</string>
     <string name="call">Zavolať</string>
     <string name="enter_phone_number">Zadajte telefónne číslo</string>
@@ -26,10 +26,15 @@
     <string name="action_sort_firm_list">Zoradiť zoznam podnikov</string>
     <string name="latitude">Zem. šírka</string>
     <string name="longitude">Zem. dĺžka</string>
-    <string name="is_required">Je potrebné zadať %s</string>
+    <string name="is_required">Je potrebné zadať parametre %s</string>
     <string name="succesfully_added">Podnik bol úspešne pridaný.</string>
     <string name="succesfully_updated">Podnik bol úspešne upravený.</string>
     <string name="network_error">Problém s internetom.</string>
+    <string name="delete_question">Ste si istý, že chcete vymazať podnik %s majiteľa %s?</string>
+    <string name="dialog_alert_title">Upozornenie!</string>
+    <string name="yes">Áno</string>
+    <string name="no">Nie</string>
+    <string name="invalid_url">Neplatná webová adresa</string>
 
     <string-array name='firm_types'>
         <item>bar</item>

@@ -87,6 +87,16 @@ class FirmFormFragment : Fragment() {
         }
     }
 
+    private fun showDeleteFirmConfirmationDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.dialog_alert_title))
+            .setMessage(getString(R.string.delete_question, firm.name, firm.ownerName))
+            .setCancelable(false)
+            .setNegativeButton(getString(R.string.no)) { _, _ -> }
+            .setPositiveButton(getString(R.string.yes)) { _, _ -> deleteFirm() }
+            .show()
+    }
+
     private fun deleteFirm() {
         firmViewModel.deleteFirm(firm)
         goToFirmListScreen()
